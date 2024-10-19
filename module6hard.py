@@ -55,7 +55,7 @@ class Triangle(Figure):
     def __init__(self, color, *sides):
         super().__init__(color, *sides)
         if not self.get_sides():  # Если стороны не указаны
-            self.set_sides(*([1] * self.sides_count))  # Устанавливаем стандартные стороны
+            self.set_sides(1)  # Устанавливаем стандартные стороны
 
 
     def get_square(self):
@@ -76,10 +76,6 @@ class Cube(Figure):
         if self.get_sides():  # Проверка на наличие сторон
             return math.pow(self.get_sides()[0], 3)  # Используем одно значение стороны для расчета объёма
         return 0  # Если сторон нет, отдаем 0 или выбрасываем ошибку
-
-# Код для проверки
-circle1 = Circle((200, 200, 100), 10) # (Цвет, стороны)
-cube1 = Cube((222, 35, 130), 6)
 
 # Код для проверки
 circle1 = Circle((200, 200, 100), 10)  # (Цвет, стороны)
