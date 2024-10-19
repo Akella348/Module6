@@ -10,7 +10,7 @@ class Figure:
         self.set_sides(*sides)
 
     def __is_valid_color(self, r, g, b):
-        return all(isinstance(v, int) and 0 <= v <= 255 for v in (r, g, b))
+        return all(isinstance(v, int) and 0 <= v <= 255 for v in (r, g, b)) # проверка на int и диапазон
 
     def set_color(self, r, g, b):
         if self.__is_valid_color(r, g, b):
@@ -21,18 +21,18 @@ class Figure:
 
     def __is_valid_sides(self, *new_sides):
         return len(new_sides) == self.sides_count and all(isinstance(side, (int, float)) and side > 0 for side in new_sides)
-
+    # Проверка на размер тип и значение больше 0
     def get_sides(self):
         return self.__sides
 
     def __len__(self):
-        return sum(self.__sides)
+        return sum(self.__sides) # переопределение на расчет периметра
 
     def set_sides(self, *new_sides):
-        if len(new_sides) == 1:  # Если передано одно значение
+        if len(new_sides) == 1:  # если передано одно значение
             new_sides = (new_sides[0],) * self.sides_count  # Создаем кортеж с одинаковыми значениями
-        if self.__is_valid_sides(*new_sides):
-            self.__sides = list(new_sides)
+        if self.__is_valid_sides(*new_sides): # проверка
+            self.__sides = list(new_sides) # добавление
 
 class Circle(Figure):
     sides_count = 1
@@ -47,10 +47,7 @@ class Circle(Figure):
     def get_square(self):
         return math.pi * math.pow(self.__radius, 2)
 
-    def set_sides(self, *new_sides):
-        if self._Figure__is_valid_sides(*new_sides):
-            super().set_sides(*new_sides)
-            self.__radius = self.get_sides()[0] / (2 * math.pi)
+
 
 class Triangle(Figure):
     sides_count = 3
@@ -84,16 +81,20 @@ class Cube(Figure):
 circle1 = Circle((200, 200, 100), 10) # (Цвет, стороны)
 cube1 = Cube((222, 35, 130), 6)
 
+# Код для проверки
+circle1 = Circle((200, 200, 100), 10)  # (Цвет, стороны)
+cube1 = Cube((222, 35, 130), 6)  # Передаем 6 как длину стороны
+
 # Проверка на изменение цветов:
-circle1.set_color(55, 66, 77) # Изменится
+circle1.set_color(55, 66, 77)  # Изменится
 print(circle1.get_color())
-cube1.set_color(300, 70, 15) # Не изменится
+cube1.set_color(300, 70, 15)  # Не изменится
 print(cube1.get_color())
 
 # Проверка на изменение сторон:
-cube1.set_sides(5, 3, 12, 4, 5) # Не изменится
+cube1.set_sides(5, 3, 12, 4, 5)  # Не изменится
 print(cube1.get_sides())
-circle1.set_sides(15) # Изменится
+circle1.set_sides(15)  # Изменится
 print(circle1.get_sides())
 
 # Проверка периметра (круга), это и есть длина:
